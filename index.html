@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Nút Tailwind CSS AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Tùy chỉnh thanh cuộn */
+        .scrollbar-thin::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Bộ Sưu Tập Nút Tailwind CSS AI</h1>
+        <div id="buttons-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Nội dung sẽ được thêm vào bằng JavaScript -->
+        </div>
+    </div>
+
+    <script type="module">
+        import buttons from './buttons.js';
+        import { copyCode } from './utils.js';
+
+        const container = document.getElementById('buttons-container');
+
+        buttons.forEach(button => {
+            const escapedCode = button.code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const buttonCard = `
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="mb-4 flex justify-center">
+                        ${button.code}
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="text-sm text-gray-600 mb-2">Mã nguồn:</p>
+                        <div class="flex items-start gap-2">
+                            <div class="relative w-full">
+                                <pre class="bg-gray-50 p-3 rounded-md text-sm font-mono" style="overflow-x: auto; white-space: nowrap;"><code class="language-html">${escapedCode}</code></pre>
+                            </div>
+                            <button class="flex-shrink-0 text-gray-500 hover:text-gray-700 p-2" 
+                                    onclick="copyCode(this)" 
+                                    data-code="${button.code.replace(/"/g, '&quot;')}"
+                                    title="Sao chép mã">
+                                <i class="fas fa-copy text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', buttonCard);
+        });
+
+        // Sửa lại hàm copyCode global
+        window.copyCode = function (button) {
+            const code = button.getAttribute('data-code');
+            navigator.clipboard.writeText(code);
+            Toastify({
+                text: "Đã sao chép mã!",
+                duration: 2000,
+                gravity: "bottom",
+                position: "right",
+                style: {
+                    background: "#4CAF50",
+                }
+            }).showToast();
+        };
+    </script>
+</body>
+
+</html>
