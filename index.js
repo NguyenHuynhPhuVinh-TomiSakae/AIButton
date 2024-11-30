@@ -53,13 +53,18 @@ const generateButtons = async () => {
     }
   ]
   
-  Lưu ý:
+  Yêu cầu thiết kế:
   - CHỈ TẠO MỘT NÚT DUY NHẤT
   - Nút PHẢI CÓ THIẾT KẾ HOÀN TOÀN MỚI, không được trùng với bất kỳ nút nào đã có
   - Classes được sử dụng phải hoàn toàn khác với các classes đã có
-  - Phong cách thiết kế phải độc đáo và không giống với các nút trước đó
-  - Sử dụng các hiệu ứng hover, focus, active độc đáo
-  - Khuyến khích sử dụng gradient, shadow, animation đặc biệt
+  - Phải sử dụng ít nhất 2 trong các yếu tố sau để tạo sự khác biệt:
+    + Gradient độc đáo (ví dụ: từ 3 màu trở lên hoặc gradient góc đặc biệt)
+    + Animation phức tạp (kết hợp nhiều hiệu ứng)
+    + Border style không phổ biến (double, dotted, dashed với màu sắc đặc biệt)
+    + Kết hợp nhiều pseudo-class (:hover + :focus + :active)
+    + Sử dụng các hiệu ứng đặc biệt (backdrop-filter, clip-path, transform)
+  - Màu sắc phải khác biệt hoàn toàn với các nút trước đó
+  - Hình dạng nút phải độc đáo (có thể không phải hình chữ nhật thông thường)
   - Đảm bảo trả về đúng định dạng JSON với ĐÚNG MỘT PHẦN TỬ trong mảng`;
 
   const result = await model.generateContent(prompt);
