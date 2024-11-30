@@ -38,8 +38,9 @@ const generateButtons = async () => {
 
   const prompt = `Tạo 1 nút (CHỈ MỘT NÚT DUY NHẤT) với Tailwind CSS có kiểu thiết kế mới lạ và độc đáo. 
   ${existingButtons.length > 0
-      ? `TUYỆT ĐỐI KHÔNG ĐƯỢC TRÙNG VỚI CÁC TÊN NÚT SAU:
-       ${existingButtons.slice(-20).filter(btn => btn && btn.name).map(btn => btn.name).join(', ')}`
+      ? `TUYỆT ĐỐI KHÔNG ĐƯỢC TRÙNG VỚI CÁC NÚT SAU (cả về tên và kiểu dáng):
+       Tên: ${existingButtons.slice(-20).filter(btn => btn && btn.name).map(btn => btn.name).join(', ')}
+       Classes đã sử dụng: ${existingButtons.slice(-20).filter(btn => btn && btn.classes).map(btn => btn.classes).join(', ')}`
       : ''
     }
 
@@ -54,7 +55,9 @@ const generateButtons = async () => {
   
   Lưu ý:
   - CHỈ TẠO MỘT NÚT DUY NHẤT
-  - Nút PHẢI CÓ THIẾT KẾ HOÀN TOÀN MỚI, không được trùng với các nút đã có
+  - Nút PHẢI CÓ THIẾT KẾ HOÀN TOÀN MỚI, không được trùng với bất kỳ nút nào đã có
+  - Classes được sử dụng phải hoàn toàn khác với các classes đã có
+  - Phong cách thiết kế phải độc đáo và không giống với các nút trước đó
   - Sử dụng các hiệu ứng hover, focus, active độc đáo
   - Khuyến khích sử dụng gradient, shadow, animation đặc biệt
   - Đảm bảo trả về đúng định dạng JSON với ĐÚNG MỘT PHẦN TỬ trong mảng`;
