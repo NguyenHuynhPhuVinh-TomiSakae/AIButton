@@ -70,14 +70,19 @@ const generateButtons = async () => {
   const result = await model.generateContent(prompt);
   const newButton = JSON.parse(result.response.text())[0];
 
-  // Thêm nút mới vào mảng hiện có
-  existingButtons.push(newButton);
+  // Kiểm tra nút mới có hợp lệ không
+  if (newButton && newButton.name && newButton.code && newButton.classes) {
+    // Thêm nút mới vào mảng hiện có
+    existingButtons.push(newButton);
 
-  // Ghi vào file buttons.js với định dạng đẹp hơn
-  const buttonCode = `const buttons = ${JSON.stringify(existingButtons, null, 4)};\n\nexport default buttons;\n`;
-  await fs.writeFile('./buttons.js', buttonCode);
+    // Ghi vào file buttons.js với định dạng đẹp hơn
+    const buttonCode = `const buttons = ${JSON.stringify(existingButtons, null, 4)};\n\nexport default buttons;\n`;
+    await fs.writeFile('./buttons.js', buttonCode);
 
-  console.log(`[${moment().format('HH:mm:ss')}] [AI] Đã thêm 1 nút mới`);
+    console.log(`[${moment().format('HH:mm:ss')}] [AI] Đã thêm 1 nút mới`);
+  } else {
+    console.log(`[${moment().format('HH:mm:ss')}] [AI] Không thêm nút mới do dữ liệu không hợp lệ`);
+  }
 }
 
 console.log(`[${moment().format('HH:mm:ss')}] Bắt đầu tạo nút...`);
